@@ -7,7 +7,7 @@ Clone the repo, run `dotnet restore` and `dotnet build`. Built on Visual Studio 
 ## Usage
 
 #### Generate default JSON example 1
-Sample JSON:
+Sample JSON schema:
 
 ```json
 {
@@ -83,7 +83,7 @@ Assert.IsTrue(JToken.DeepEquals(defaultJSON, expectedResult));
 
 Let's up the ante a bit with local references and allOf operator
 
-Sample JSON:
+Sample JSON schema:
 
 ```json
 {
