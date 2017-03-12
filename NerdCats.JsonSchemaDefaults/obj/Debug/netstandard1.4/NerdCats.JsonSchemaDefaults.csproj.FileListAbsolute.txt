@@ -1,7 +1,0 @@
-C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults\bin\Debug\netstandard1.4\NerdCats.JsonSchemaDefaults.deps.json
-C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults\bin\Debug\netstandard1.4\NerdCats.JsonSchemaDefaults.dll
-C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults\obj\Debug\netstandard1.4\NerdCats.JsonSchemaDefaults.AssemblyInfo.cs
-C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults\bin\Debug\netstandard1.4\NerdCats.JsonSchemaDefaults.pdb
-C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults\obj\Debug\netstandard1.4\NerdCats.JsonSchemaDefaults.dll
-C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults\obj\Debug\netstandard1.4\NerdCats.JsonSchemaDefaults.pdb
-C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults\obj\Debug\netstandard1.4\NerdCats.JsonSchemaDefaults.csprojResolveAssemblyReference.cache
