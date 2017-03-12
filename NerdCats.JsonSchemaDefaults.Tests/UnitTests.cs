@@ -85,5 +85,52 @@ namespace NerdCats.JsonSchemaDefaults.Tests
             var expectedResult = JArray.Parse("['getchute', 'chute']");
             Assert.IsTrue(JToken.DeepEquals(defaultJSON, expectedResult));
         }
+
+        [TestMethod]
+        public void Test_Reading_Defaults_From_String_Schema_With_Enum_And_Wrong_Defaults_Throws()
+        {
+            Assert.ThrowsException<JSchemaValidationException>(() =>
+            {
+                var schemaDefaultGenerator = new SchemaDefaultGenerator();
+                var defaultJSON = schemaDefaultGenerator.GetDefaults("{" +
+                    "\"title\": \"Album Options\", " +
+                    "\"type\": \"object\"," +
+                    "\"properties\": {" +
+                    "   \"sort\": {" +
+                    "       \"type\": \"string\"," +
+                    "        enum: ['somethingElse']," +
+                    "       \"default\": \"id\"" +
+                    "   }," +
+                    "   \"per_page\": {" +
+                    "       \"default\": 30," +
+                    "       \"type\": \"integer\"" +
+                    "   }" +
+                    "}}");
+            });
+        }
+
+        [TestMethod]
+        public void Test_Reading_Defaults_From_String_Schema_With_Enum_Gets_Defaults()
+        {
+            var schemaDefaultGenerator = new SchemaDefaultGenerator();
+            var defaultJSON = schemaDefaultGenerator.GetDefaults("{" +
+                "\"title\": \"Album Options\", " +
+                "\"type\": \"object\"," +
+                "\"properties\": {" +
+                "   \"sort\": {" +
+                "       \"type\": \"string\"," +
+                "        enum: ['id']," +
+                "       \"default\": \"id\"" +
+                "   }," +
+                "   \"per_page\": {" +
+                "       \"default\": 30," +
+                "       \"type\": \"integer\"" +
+                "   }" +
+                "}}");
+
+            var expectedResult = JObject.Parse("{ sort: 'id', per_page: 30 }");
+
+            Assert.IsTrue(JToken.DeepEquals(defaultJSON, expectedResult));
+        }
     }
 }

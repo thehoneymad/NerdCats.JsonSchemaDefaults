@@ -25,8 +25,8 @@
                 return JObject.Parse("{}");
 
             var finalResult = GetDefaultsFromSchema(schemaObj);
-            
-            switch(finalResult.Type)
+
+            switch (finalResult.Type)
             {
                 case JTokenType.Object:
                     return finalResult as JObject;
@@ -94,6 +94,10 @@
         private JToken GetDefaultValue(JSchema jSchema)
         {
             var defaultVal = jSchema.Default;
+            if (jSchema.Enum?.Count > 0)
+            {
+                defaultVal.Validate(jSchema);
+            }
             return defaultVal;
         }
     }
