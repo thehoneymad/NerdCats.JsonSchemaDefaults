@@ -2,6 +2,14 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Description>Generate default JSON from a JSONSchema</Description>
+    <Copyright>NerdCats</Copyright>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/thehoneymad/NerdCats.JsonSchemaDefaults</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/thehoneymad/NerdCats.JsonSchemaDefaults/blob/master/License.md</PackageLicenseUrl>
   </PropertyGroup>
 
   <ItemGroup>

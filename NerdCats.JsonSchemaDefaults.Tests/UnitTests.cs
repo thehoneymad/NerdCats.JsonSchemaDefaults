@@ -132,5 +132,57 @@ namespace NerdCats.JsonSchemaDefaults.Tests
 
             Assert.IsTrue(JToken.DeepEquals(defaultJSON, expectedResult));
         }
+
+        [TestMethod]
+        public void Test_Reading_Defaults_From_String_Schema_With_Local_Reference()
+        {
+            var schemaDefaultGenerator = new SchemaDefaultGenerator();
+            var schemaJson = "{" +
+                "type: 'object'," +
+                "properties: {" +
+                    "farewell_to_arms: { " +
+                        "allOf: [" +
+                            "{'$ref': '#/definitions/book'}," +
+                            "{'properties': {" +
+                                    "price: {" +
+                                        "default : 30" +
+                                    "}" +
+                            "}" +
+                        "}]" +
+                     "}," +
+                    "for_whom_the_bell_tolls: {" +
+                        "allOf: [" +
+                            "{'$ref': '#/definitions/book'}, " +
+                            "{ properties: { " +
+                                " price: { " +
+                                    "default: 100 " +
+                                    "}" +
+                                "}" +
+                             "}" +
+                           "]" +
+                        "}" +
+                  "}," +
+                "definitions: {" +
+                    "book: {" +
+                        "type: 'object'," +
+                        "properties: {" +
+                            "author: {" +
+                                "type: 'string'," +
+                                "default: 'Hemingway'" +
+                             "}," +
+                            "price: {" +
+                                "type: 'integer'," +
+                                "default: 10" +
+                            "}" +
+                        "}" +
+                    "}" +
+                "}" +
+            "}";
+
+            var defaultJson = schemaDefaultGenerator.GetDefaults(schemaJson);
+            var expectedDefault = JObject.Parse("{ farewell_to_arms: { author: 'Hemingway', price: 30 }, for_whom_the_bell_tolls: { author: 'Hemingway', price: 100 } }");
+
+            Assert.IsTrue(JToken.DeepEquals(defaultJson, expectedDefault));
+        }
     }
 }

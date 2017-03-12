@@ -45,6 +45,9 @@
                 case JSchemaType.Array:
                     returnToken = GetDefaultValueFromArray(schemaObj);
                     break;
+                case null:
+                    returnToken = GetDefaultsFromOperators(schemaObj);
+                    break;
                 case JSchemaType.Object:
                     returnToken = GetDefaultsFromObject(schemaObj);
                     break;
@@ -63,12 +66,39 @@
             return returnToken;
         }
 
+        private JToken GetDefaultsFromOperators(JSchema schemaObj)
+        {
+            /* INFO: We are here because the schema is lacking a type. 
+             * We will check for allOf operator for now and if we see one
+             * We will try to generate a default JSON based on what we see
+             * and use the default value found in the subschema. */
+            JToken returnObject = default(JToken);
+
+            if (schemaObj.AllOf?.Count > 0)
+            {
+                returnObject = new JObject(); // AllOf requires the type to be an object by default
+                foreach (var subSchema in schemaObj.AllOf)
+                {
+                    foreach (var property in subSchema.Properties.Keys)
+                    {
+                        returnObject[property] = GetDefaultsFromSchema(subSchema.Properties[property]);
+                    }
+                }
+            }
+            else
+            {
+                // INFO: This is a fallback, this property came without any type 
+                // and we have no clue what it is, last resort is treating it as a value
+                returnObject = GetDefaultValue(schemaObj);
+            }
+            return returnObject;
+        }
+
         private JToken GetDefaultValueFromArray(JSchema schemaObj)
         {
             if (schemaObj.Items?.Count == 0)
                 return new JArray();
 
-            var minItemCount = schemaObj.MinimumItems ?? 0;
             var defaultArray = schemaObj.Default as JArray;
             if (defaultArray == null)
                 throw new NullReferenceException(nameof(defaultArray));
