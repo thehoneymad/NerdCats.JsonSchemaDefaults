@@ -2,6 +2,7 @@
 {
     using Newtonsoft.Json.Linq;
     using Newtonsoft.Json.Schema;
+    using System;
     using System.Linq;
 
     public class SchemaDefaultGenerator
@@ -23,8 +24,28 @@
             if (schemaProperties == null || !schema.Any())
                 return JObject.Parse("{}");
 
-            var returnObject = new JObject();
+            return GetDefaultsFromSchema(schemaObj);
+        }
 
+        private JObject GetDefaultsFromSchema(JSchema schemaObj)
+        {
+            var returnObject = new JObject();
+            switch (schemaObj.Type)
+            {
+                case JSchemaType.Object:
+                    returnObject = GetDefaultsFromObject(schemaObj);
+                    break;
+                default:
+                    throw new NotImplementedException(schemaObj.Type.ToString());
+            }
+
+            return returnObject;
+        }
+
+        private JObject GetDefaultsFromObject(JSchema schemaObj)
+        {
+            var schemaProperties = schemaObj.Properties;
+            var returnObject = new JObject();
             foreach (var property in schemaProperties.Keys)
             {
                 returnObject[property] = GetDefaultValue(schemaProperties[property]);
@@ -35,7 +56,7 @@
 
         private JToken GetDefaultValue(JSchema jSchema)
         {
-            var defaultVal =  jSchema.Default;
+            var defaultVal = jSchema.Default;
             return defaultVal;
         }
     }
