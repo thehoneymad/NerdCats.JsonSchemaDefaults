@@ -2855,6 +2855,12 @@
           "NETStandard.Library": "1.6.1",
           "Newtonsoft.Json": "9.0.1",
           "Newtonsoft.Json.Schema": "2.0.8"
+        },
+        "compile": {
+          "bin/placeholder/netstandard1.6/NerdCats.JsonSchemaDefaults.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/netstandard1.6/NerdCats.JsonSchemaDefaults.dll": {}
         }
       }
     }
@@ -8605,6 +8611,9 @@
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
+      "files": {
+        "lib/netcoreapp1.1/NerdCats.JsonSchemaDefaults.Tests.dll": "C:\\nerdcats\\NerdCats.JsonSchemaDefaults\\NerdCats.JsonSchemaDefaults.Tests\\bin\\placeholder\\netcoreapp1.1\\NerdCats.JsonSchemaDefaults.Tests.dll"
+      },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
@@ -8618,22 +8627,21 @@
     "frameworks": {
       "netcoreapp1.1": {
         "dependencies": {
-          "MSTest.TestFramework": {
+          "Microsoft.NETCore.App": {
             "target": "Package",
-            "version": "1.1.11"
+            "version": "1.1.1"
+          },
+          "Microsoft.NET.Test.Sdk": {
+            "target": "Package",
+            "version": "15.0.0"
           },
           "MSTest.TestAdapter": {
             "target": "Package",
             "version": "1.1.11"
           },
-          "Microsoft.NETCore.App": {
+          "MSTest.TestFramework": {
             "target": "Package",
-            "version": "1.1.1",
-            "autoReferenced": true
-          },
-          "Microsoft.NET.Test.Sdk": {
-            "target": "Package",
-            "version": "15.0.0"
+            "version": "1.1.11"
           }
         }
       }

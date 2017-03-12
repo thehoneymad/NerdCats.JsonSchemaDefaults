@@ -4874,6 +4874,9 @@
       "originalTargetFrameworks": [
         "netstandard1.6"
       ],
+      "files": {
+        "lib/netstandard1.6/NerdCats.JsonSchemaDefaults.dll": "C:\\nerdcats\\NerdCats.JsonSchemaDefaults\\NerdCats.JsonSchemaDefaults\\bin\\placeholder\\netstandard1.6\\NerdCats.JsonSchemaDefaults.dll"
+      },
       "frameworks": {
         "netstandard1.6": {
           "projectReferences": {}
@@ -4885,16 +4888,15 @@
         "dependencies": {
           "NETStandard.Library": {
             "target": "Package",
-            "version": "1.6.1",
-            "autoReferenced": true
-          },
-          "Newtonsoft.Json.Schema": {
-            "target": "Package",
-            "version": "2.0.8"
+            "version": "1.6.1"
           },
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "9.0.1"
+          },
+          "Newtonsoft.Json.Schema": {
+            "target": "Package",
+            "version": "2.0.8"
           }
         }
       }

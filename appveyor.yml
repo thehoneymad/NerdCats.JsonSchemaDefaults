@@ -11,9 +11,9 @@ install:
 - ps: appveyor DownloadFile https://go.microsoft.com/fwlink/?LinkID=835014 -FileName "c:\dotnet.exe"
 - cmd: call c:\dotnet.exe /quiet
 before_build:
-- appveyor-retry dotnet restore -v Minimal
+- cmd: c:\dotnet.exe restore
 build_script:
-- dotnet build -c %CONFIGURATION% --version-suffix %LABEL%
+- cmd: c:\dotnet.exe build -c %CONFIGURATION% --version-suffix %LABEL%
 test_script:
 - dotnet test "NerdCats.JsonSchemaDefaults.Tests\NerdCats.JsonSchemaDefaults.Tests.csproj" -c %CONFIGURATION%
 cache:
