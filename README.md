@@ -11,16 +11,16 @@ Sample JSON:
 
 ```json
 {
-    title: "Album Options",
-    type: "object",
-    properties: {
-        sort: {
-                type : "string",
-                default: "id"
+    "title": "Album Options",
+    "type": "object",
+    "properties": {
+        "sort": {
+                "type" : "string",
+                "default": "id"
             },
-        per_page : {
-                default : 30,
-                type: "integer"
+        "per_page" : {
+                "default" : 30,
+                "type": "integer"
         }
     }
 }
