@@ -46,6 +46,15 @@ var expectedResult = JObject.Parse("{ sort: 'id', per_page: 30 }");
 Assert.IsTrue(JToken.DeepEquals(defaultJSON, expectedResult));
 ```
 
+Generated default JSON would be :
+
+```json
+    {
+        "sort": "id",
+        "per_page": 30
+    }
+```
+
 ## Contributors
 
 * Swagata 'thehoneymad' Prateek @SwagataPrateek

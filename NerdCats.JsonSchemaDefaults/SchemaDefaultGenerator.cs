@@ -10,20 +10,19 @@
         public SchemaDefaultGenerator()
         { }
 
-        public JToken GetDefaults(JObject schema)
+        public JToken GetDefaults(JObject schema, bool validateGeneratedJson = true)
         {
-            return GetDefaults(schema.ToString());
+            return GetDefaults(schema.ToString(), validateGeneratedJson);
         }
 
         public JToken GetDefaults(string schema, bool validateGeneratedJson = true)
         {
             var schemaObj = JSchema.Parse(schema);
-            var schemaProperties = schemaObj.Properties;
+            return GetDefaults(schemaObj);
+        }
 
-            // TODO: Expecting to parse only Object JSON schemas for now, arrays are coming soon
-            if (schemaProperties == null || !schema.Any())
-                return JObject.Parse("{}");
-
+        public JToken GetDefaults(JSchema schemaObj, bool validateGeneratedJson = true)
+        {
             var finalResult = GetDefaultsFromSchema(schemaObj);
 
             if (validateGeneratedJson)
@@ -86,8 +85,8 @@
             }
             else
             {
-                // INFO: This is a fallback, this property came without any type 
-                // and we have no clue what it is, last resort is treating it as a value
+                /* INFO: This is a fallback, this property came without any type 
+                 * and we have no clue what it is, last resort is treating it as a value */
                 returnObject = GetDefaultValue(schemaObj);
             }
             return returnObject;
