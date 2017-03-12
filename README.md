@@ -26,6 +26,8 @@ Sample JSON:
 }
 ```
 
+To generate a JSON with all default values defined here use `SchemaDefaultGenerator` like the following:
+
 ```csharp
 var schemaDefaultGenerator = new SchemaDefaultGenerator();
 var defaultJSON = schemaDefaultGenerator.GetDefaults(JObject.Parse("{" +
@@ -54,6 +56,30 @@ Generated default JSON would be :
         "per_page": 30
     }
 ```
+
+You can also opt for the sweet extension method for `JSchema` class like the following:
+
+```csharp
+var schema = JSchema.Parse("{" +
+                "\"title\": \"Album Options\", " +
+                "\"type\": \"object\"," +
+                "\"properties\": {" +
+                "   \"sort\": {" +
+                "       \"type\": \"string\"," +
+                "       \"default\": \"id\"" +
+                "   }," +
+                "   \"per_page\": {" +
+                "       \"default\": 30," +
+                "       \"type\": \"integer\"" +
+                "   }" +
+                "}}");
+var defaultJSON = schema.GetDefaultJSON();
+var expectedResult = JObject.Parse("{ sort: 'id', per_page: 30 }");
+
+Assert.IsTrue(JToken.DeepEquals(defaultJSON, expectedResult));
+```
+
+
 
 ## Contributors
 
