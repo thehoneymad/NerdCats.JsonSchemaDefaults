@@ -184,5 +184,28 @@ namespace NerdCats.JsonSchemaDefaults.Tests
 
             Assert.IsTrue(JToken.DeepEquals(defaultJson, expectedDefault));
         }
+
+        [TestMethod]
+        public void Test_Reading_Defaults_From_Schema_Using_Extension_Gets_Default_Json()
+        {           
+            var schema = JSchema.Parse("{" +
+                "\"title\": \"Album Options\", " +
+                "\"type\": \"object\"," +
+                "\"properties\": {" +
+                "   \"sort\": {" +
+                "       \"type\": \"string\"," +
+                "       \"default\": \"id\"" +
+                "   }," +
+                "   \"per_page\": {" +
+                "       \"default\": 30," +
+                "       \"type\": \"integer\"" +
+                "   }" +
+                "}}");
+
+            var defaultJSON = schema.GetDefaultJSON();
+            var expectedResult = JObject.Parse("{ sort: 'id', per_page: 30 }");
+
+            Assert.IsTrue(JToken.DeepEquals(defaultJSON, expectedResult));
+        }
     }
 }
