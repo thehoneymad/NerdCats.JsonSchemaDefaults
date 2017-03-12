@@ -15,7 +15,7 @@
             return GetDefaults(schema.ToString());
         }
 
-        public JToken GetDefaults(string schema)
+        public JToken GetDefaults(string schema, bool validateGeneratedJson = true)
         {
             var schemaObj = JSchema.Parse(schema);
             var schemaProperties = schemaObj.Properties;
@@ -25,6 +25,9 @@
                 return JObject.Parse("{}");
 
             var finalResult = GetDefaultsFromSchema(schemaObj);
+
+            if (validateGeneratedJson)
+                finalResult.Validate(schemaObj);
 
             switch (finalResult.Type)
             {
@@ -78,12 +81,8 @@
             {
                 returnObject = new JObject(); // AllOf requires the type to be an object by default
                 foreach (var subSchema in schemaObj.AllOf)
-                {
                     foreach (var property in subSchema.Properties.Keys)
-                    {
                         returnObject[property] = GetDefaultsFromSchema(subSchema.Properties[property]);
-                    }
-                }
             }
             else
             {
@@ -124,10 +123,6 @@
         private JToken GetDefaultValue(JSchema jSchema)
         {
             var defaultVal = jSchema.Default;
-            if (jSchema.Enum?.Count > 0)
-            {
-                defaultVal.Validate(jSchema);
-            }
             return defaultVal;
         }
     }
