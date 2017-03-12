@@ -24,33 +24,41 @@
             if (schemaProperties == null || !schema.Any())
                 return JObject.Parse("{}");
 
-            return GetDefaultsFromSchema(schemaObj);
+            return GetDefaultsFromSchema(schemaObj) as JObject;
         }
 
-        private JObject GetDefaultsFromSchema(JSchema schemaObj)
+        private JToken GetDefaultsFromSchema(JSchema schemaObj)
         {
-            var returnObject = new JObject();
+            JToken returnToken = default(JToken);
             switch (schemaObj.Type)
             {
                 case JSchemaType.Object:
-                    returnObject = GetDefaultsFromObject(schemaObj);
+                    returnToken = GetDefaultsFromObject(schemaObj);
+                    break;
+                case JSchemaType.String:
+                    returnToken = GetDefaultValue(schemaObj);
+                    break;
+                case JSchemaType.Integer:
+                    returnToken = GetDefaultValue(schemaObj);
                     break;
                 default:
                     throw new NotImplementedException(schemaObj.Type.ToString());
             }
 
-            return returnObject;
+            return returnToken;
         }
 
         private JObject GetDefaultsFromObject(JSchema schemaObj)
         {
             var schemaProperties = schemaObj.Properties;
+            if (schemaProperties?.Count == 0)
+                return new JObject();
+
             var returnObject = new JObject();
             foreach (var property in schemaProperties.Keys)
             {
-                returnObject[property] = GetDefaultValue(schemaProperties[property]);
+                returnObject[property] = GetDefaultsFromSchema(schemaProperties[property]);
             }
-
             return returnObject;
         }
 
