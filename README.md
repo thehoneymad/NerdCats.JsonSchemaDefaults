@@ -79,11 +79,138 @@ var expectedResult = JObject.Parse("{ sort: 'id', per_page: 30 }");
 Assert.IsTrue(JToken.DeepEquals(defaultJSON, expectedResult));
 ```
 
+#### Generate default JSON example 2
 
+Let's up the ante a bit with local references and allOf operator
+
+Sample JSON:
+
+```json
+{
+    "type": "object",
+    "properties": {
+        "farewell_to_arms": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/book"
+                },
+                {
+                    "properties": {
+                            "price": {
+                                "default" : 30,
+                            }
+                        }
+                }
+            ]
+        },
+        "for_whom_the_bell_tolls": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/book"
+                },
+                {
+                    "properties": {
+                        "price": {
+                            "default": 100
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "definitions": {
+        "book": {
+            "type": "object" ,
+            "properties": {
+                "author": {
+                    "type": "string",
+                    "default": "Hemingway",
+                },
+                "price": {
+                    "type": "integer",
+                    "default": 10,
+                }
+            }
+        }
+    }
+}
+```
+
+To generate a default JSON from this let's go the same way we have gone a moment ago
+
+```csharp
+var schemaDefaultGenerator = new SchemaDefaultGenerator();
+var schemaJson = "{" +
+                "type: 'object'," +
+                "properties: {" +
+                    "farewell_to_arms: { " +
+                        "allOf: [" +
+                            "{'$ref': '#/definitions/book'}," +
+                            "{'properties': {" +
+                                    "price: {" +
+                                        "default : 30" +
+                                    "}" +
+                            "}" +
+                        "}]" +
+                     "}," +
+                    "for_whom_the_bell_tolls: {" +
+                        "allOf: [" +
+                            "{'$ref': '#/definitions/book'}, " +
+                            "{ properties: { " +
+                                " price: { " +
+                                    "default: 100 " +
+                                    "}" +
+                                "}" +
+                             "}" +
+                           "]" +
+                        "}" +
+                  "}," +
+                "definitions: {" +
+                    "book: {" +
+                        "type: 'object'," +
+                        "properties: {" +
+                            "author: {" +
+                                "type: 'string'," +
+                                "default: 'Hemingway'" +
+                             "}," +
+                            "price: {" +
+                                "type: 'integer'," +
+                                "default: 10" +
+                            "}" +
+                        "}" +
+                    "}" +
+                "}" +
+            "}";
+
+var defaultJson = schemaDefaultGenerator.GetDefaults(schemaJson);
+var expectedDefault = JObject.Parse("{ farewell_to_arms: { author: 'Hemingway', price: 30 }, for_whom_the_bell_tolls: { author: 'Hemingway', price: 100 } }");
+
+Assert.IsTrue(JToken.DeepEquals(defaultJson, expectedDefault));
+```
+The resultant default JSON would look like
+
+```json
+{
+    "farewell_to_arms": {
+        "author": "Hemingway",
+        "price": 30
+    },
+    "for_whom_the_bell_tolls": {
+        "author": "Hemingway",
+        "price": 100
+    }
+}
+```
+
+## Known Limitations
+This library conforms to JsonSchema draft 4. This still doesn't support default values for `anyOf` and `oneOf` operator defaults.
 
 ## Contributors
 
 * Swagata 'thehoneymad' Prateek @SwagataPrateek
+
+# Special mentions
+Thanks goes to Eugene Tsypkin for [json-schema-defaults](https://github.com/chute/json-schema-defaults) for inspiration.
 
 
 ## License
