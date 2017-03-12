@@ -10,12 +10,12 @@
         public SchemaDefaultGenerator()
         { }
 
-        public JObject GetDefaults(JObject schema)
+        public JToken GetDefaults(JObject schema)
         {
             return GetDefaults(schema.ToString());
         }
 
-        public JObject GetDefaults(string schema)
+        public JToken GetDefaults(string schema)
         {
             var schemaObj = JSchema.Parse(schema);
             var schemaProperties = schemaObj.Properties;
@@ -24,7 +24,17 @@
             if (schemaProperties == null || !schema.Any())
                 return JObject.Parse("{}");
 
-            return GetDefaultsFromSchema(schemaObj) as JObject;
+            var finalResult = GetDefaultsFromSchema(schemaObj);
+            
+            switch(finalResult.Type)
+            {
+                case JTokenType.Object:
+                    return finalResult as JObject;
+                case JTokenType.Array:
+                    return finalResult as JArray;
+                default:
+                    throw new ArgumentException();
+            }
         }
 
         private JToken GetDefaultsFromSchema(JSchema schemaObj)
@@ -32,20 +42,38 @@
             JToken returnToken = default(JToken);
             switch (schemaObj.Type)
             {
+                case JSchemaType.Array:
+                    returnToken = GetDefaultValueFromArray(schemaObj);
+                    break;
                 case JSchemaType.Object:
                     returnToken = GetDefaultsFromObject(schemaObj);
                     break;
                 case JSchemaType.String:
+                case JSchemaType.Integer:
+                case JSchemaType.Boolean:
                     returnToken = GetDefaultValue(schemaObj);
                     break;
-                case JSchemaType.Integer:
-                    returnToken = GetDefaultValue(schemaObj);
+                case JSchemaType.None:
+                case JSchemaType.Null:
+                    returnToken = new JObject();
                     break;
                 default:
                     throw new NotImplementedException(schemaObj.Type.ToString());
             }
 
             return returnToken;
+        }
+
+        private JToken GetDefaultValueFromArray(JSchema schemaObj)
+        {
+            if (schemaObj.Items?.Count == 0)
+                return new JArray();
+
+            var minItemCount = schemaObj.MinimumItems ?? 0;
+
+            var enumerableArray = schemaObj.Items.Select(schema => GetDefaultsFromSchema(schema));
+
+            return new JArray(enumerableArray);
         }
 
         private JObject GetDefaultsFromObject(JSchema schemaObj)
