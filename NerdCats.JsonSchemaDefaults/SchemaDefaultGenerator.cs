@@ -33,7 +33,7 @@
                 case JTokenType.Array:
                     return finalResult as JArray;
                 default:
-                    throw new ArgumentException();
+                    throw new InvalidOperationException();
             }
         }
 
@@ -60,7 +60,6 @@
                 default:
                     throw new NotImplementedException(schemaObj.Type.ToString());
             }
-
             return returnToken;
         }
 
@@ -70,10 +69,12 @@
                 return new JArray();
 
             var minItemCount = schemaObj.MinimumItems ?? 0;
+            var defaultArray = schemaObj.Default as JArray;
+            if (defaultArray == null)
+                throw new NullReferenceException(nameof(defaultArray));
 
-            var enumerableArray = schemaObj.Items.Select(schema => GetDefaultsFromSchema(schema));
-
-            return new JArray(enumerableArray);
+            defaultArray.Validate(schemaObj);
+            return defaultArray;
         }
 
         private JObject GetDefaultsFromObject(JSchema schemaObj)
