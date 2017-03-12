@@ -1,0 +1,14 @@
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\bin\Debug\netcoreapp1.1\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\bin\Debug\netcoreapp1.1\NerdCats.JsonSchemaDefaults.Tests.deps.json
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\bin\Debug\netcoreapp1.1\NerdCats.JsonSchemaDefaults.Tests.runtimeconfig.json
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\bin\Debug\netcoreapp1.1\NerdCats.JsonSchemaDefaults.Tests.runtimeconfig.dev.json
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\bin\Debug\netcoreapp1.1\NerdCats.JsonSchemaDefaults.Tests.dll
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\bin\Debug\netcoreapp1.1\NerdCats.JsonSchemaDefaults.Tests.pdb
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\bin\Debug\netcoreapp1.1\NerdCats.JsonSchemaDefaults.dll
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\bin\Debug\netcoreapp1.1\NerdCats.JsonSchemaDefaults.pdb
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\obj\Debug\netcoreapp1.1\NerdCats.JsonSchemaDefaults.Tests.csprojResolveAssemblyReference.cache
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\obj\Debug\netcoreapp1.1\NerdCats.JsonSchemaDefaults.Tests.AssemblyInfo.cs
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\obj\Debug\netcoreapp1.1\NerdCats.JsonSchemaDefaults.Tests.dll
+C:\nerdcats\NerdCats.JsonSchemaDefaults\NerdCats.JsonSchemaDefaults.Tests\obj\Debug\netcoreapp1.1\NerdCats.JsonSchemaDefaults.Tests.pdb
