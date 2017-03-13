@@ -7,9 +7,6 @@
 
     public class SchemaDefaultGenerator
     {
-        public SchemaDefaultGenerator()
-        { }
-
         public JToken GetDefaults(JObject schema, bool validateGeneratedJson = true)
         {
             return GetDefaults(schema.ToString(), validateGeneratedJson);
