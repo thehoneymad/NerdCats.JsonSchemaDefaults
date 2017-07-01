@@ -221,4 +221,4 @@ Thanks goes to Eugene Tsypkin for [json-schema-defaults](https://github.com/chut
 
 
 ## License
-(c) 2017 NerdCats. Released under the terms of the MIT License.
+Released under the terms of the MIT License.
