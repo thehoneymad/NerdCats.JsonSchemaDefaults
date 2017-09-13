@@ -1,20 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <Description>Generate default JSON from a JSONSchema</Description>
     <Copyright>NerdCats</Copyright>
     <RepositoryType>git</RepositoryType>
-    <PackageProjectUrl></PackageProjectUrl>
+    <PackageProjectUrl>
+    </PackageProjectUrl>
     <RepositoryUrl>https://github.com/thehoneymad/NerdCats.JsonSchemaDefaults</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/thehoneymad/NerdCats.JsonSchemaDefaults/blob/master/License.md</PackageLicenseUrl>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
-    <PackageReference Include="Newtonsoft.Json.Schema" Version="2.0.8" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.3" />
   </ItemGroup>
-
 </Project>

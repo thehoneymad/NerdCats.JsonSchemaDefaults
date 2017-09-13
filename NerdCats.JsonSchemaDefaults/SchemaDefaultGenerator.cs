@@ -3,7 +3,6 @@
     using Newtonsoft.Json.Linq;
     using Newtonsoft.Json.Schema;
     using System;
-    using System.Linq;
 
     public class SchemaDefaultGenerator
     {
@@ -94,8 +93,7 @@
             if (schemaObj.Items?.Count == 0)
                 return new JArray();
 
-            var defaultArray = schemaObj.Default as JArray;
-            if (defaultArray == null)
+            if (!(schemaObj.Default is JArray defaultArray))
                 throw new NullReferenceException(nameof(defaultArray));
 
             defaultArray.Validate(schemaObj);
